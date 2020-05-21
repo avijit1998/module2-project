@@ -26,7 +26,6 @@ function ListContacts(props) {
           Add Contact
         </Link>
       </div>
-
       {showContacts.length !== props.contacts.length && (
         <div className="showing-contacts">
           <span>
