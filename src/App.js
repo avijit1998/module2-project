@@ -4,7 +4,36 @@ import * as contactsAPI from "./utils/ContactsAPI";
 import CreateContact from "./CreateContact";
 import { Route } from "react-router-dom";
 import ActionButton2 from "./ActionButton";
+import PostForm from "./PostForm";
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+      isLoaded: false,
+    };
+  }
+
+  async componentDidMount() {
+    // fetch("https://jsonplaceholder.typicode.com/users")
+    //   .then((result) => result.json())
+    //   .then((jsonResult) => {
+    //     this.setState({
+    //       isLoaded: true,
+    //       items: jsonResult,
+    //     });
+    //   });
+
+    // the above can be also be written in
+
+    let result = await fetch("https://jsonplaceholder.typicode.com/users");
+    let resultJSON = await result.json();
+    this.setState({
+      isLoaded: true,
+      items: resultJSON,
+    });
+  }
+
   // state = {
   //   contacts: [],
   // };
@@ -63,34 +92,44 @@ class App extends Component {
   //   );
   // }
 
-  onClick = () => {
-    console.log(this.firstName.value);
-  };
+  // onClick = () => {
+  //   console.log(this.firstName.value);
+  // };
 
-  onKeyUp = (target, event) => {
-    if (event.keyCode === 13) {
-      switch (target) {
-        case "firstName":
-          this.firstName.focus();
-          break;
-        case "lastName":
-          this.lastName.focus();
-          break;
-        case "age":
-          this.age.focus();
-          break;
-        case "submit":
-          this.submit.focus();
-          break;
-        default:
-          break;
-      }
-    }
-  };
+  // onKeyUp = (target, event) => {
+  //   if (event.keyCode === 13) {
+  //     switch (target) {
+  //       case "firstName":
+  //         this.firstName.focus();
+  //         break;
+  //       case "lastName":
+  //         this.lastName.focus();
+  //         break;
+  //       case "age":
+  //         this.age.focus();
+  //         break;
+  //       case "submit":
+  //         this.submit.focus();
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   }
+  // };
   render() {
+    const { items, isLoaded } = this.state;
+
     return (
-      <div className="App">
-        <div>
+      isLoaded && (
+        <div className="App">
+          data has been loaded.
+          <ul>
+            {items.map((item) => {
+              return <li key={item.id}>{item.name}</li>;
+            })}
+          </ul>
+          <PostForm />
+          {/* <div>
           <span>First Name:</span>
           <input
             ref={(input) => {
@@ -130,8 +169,9 @@ class App extends Component {
           action={() => {
             console.log("deal");
           }}
-        />
-      </div>
+        /> */}
+        </div>
+      )
     );
   }
 }
