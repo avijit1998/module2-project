@@ -3,7 +3,7 @@ import ListContacts from "./ListContacts";
 import * as contactsAPI from "./utils/ContactsAPI";
 import CreateContact from "./CreateContact";
 import { Route } from "react-router-dom";
-import ActionButton2 from "./ActionButton";
+import ActionButton from "./ActionButton";
 import PostForm from "./PostForm";
 class App extends Component {
   constructor(props) {
@@ -14,25 +14,26 @@ class App extends Component {
     };
   }
 
-  async componentDidMount() {
-    // fetch("https://jsonplaceholder.typicode.com/users")
-    //   .then((result) => result.json())
-    //   .then((jsonResult) => {
-    //     this.setState({
-    //       isLoaded: true,
-    //       items: jsonResult,
-    //     });
-    //   });
+  // async componentDidMount() {
 
-    // the above can be also be written in
+  //   // fetch("https://jsonplaceholder.typicode.com/users")
+  //   //   .then((result) => result.json())
+  //   //   .then((jsonResult) => {
+  //   //     this.setState({
+  //   //       isLoaded: true,
+  //   //       items: jsonResult,
+  //   //     });
+  //   //   });
 
-    let result = await fetch("https://jsonplaceholder.typicode.com/users");
-    let resultJSON = await result.json();
-    this.setState({
-      isLoaded: true,
-      items: resultJSON,
-    });
-  }
+  //   // the above can be also be written in
+
+  //   let result = await fetch("https://jsonplaceholder.typicode.com/users");
+  //   let resultJSON = await result.json();
+  //   this.setState({
+  //     isLoaded: true,
+  //     items: resultJSON,
+  //   });
+  // }
 
   // state = {
   //   contacts: [],
@@ -117,19 +118,21 @@ class App extends Component {
   //   }
   // };
   render() {
-    const { items, isLoaded } = this.state;
+    // const { items, isLoaded } = this.state;
 
     return (
-      isLoaded && (
-        <div className="App">
-          data has been loaded.
-          <ul>
-            {items.map((item) => {
-              return <li key={item.id}>{item.name}</li>;
-            })}
-          </ul>
-          <PostForm />
-          {/* <div>
+      // isLoaded && (
+      //   <div className="App">
+      //     data has been loaded.
+      //     <ul>
+      //       {items.map((item) => {
+      //         return <li key={item.id}>{item.name}</li>;
+      //       })}
+      //     </ul>
+      //     <PostForm />
+      //   </div>
+      // )
+      /* <div>
           <span>First Name:</span>
           <input
             ref={(input) => {
@@ -163,15 +166,14 @@ class App extends Component {
             onClick={this.onClick}
           />
         </div>
+        */
 
-        <ActionButton2
-          label="deal"
-          action={() => {
-            console.log("deal");
-          }}
-        /> */}
-        </div>
-      )
+      <ActionButton
+        label="deal"
+        // action={() => {
+        //   console.log("deal");
+        // }}
+      />
     );
   }
 }
